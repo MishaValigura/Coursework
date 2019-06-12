@@ -1,3 +1,5 @@
+'use strict';
+
 function Node(value) {
     this.data = value;
     this.previous = null;
@@ -11,8 +13,7 @@ function DoublyList() {
 }
 
 DoublyList.prototype.add = function(value) {
-    let node = new Node(value);
-
+    const node = new Node(value);
     if (this._length) {
         this.tail.next = node;
         node.previous = this.tail;
@@ -51,6 +52,7 @@ DoublyList.prototype.remove = function(position) {
     let currentNode = this.head,
         length = this._length,
         count = 1,
+        afterNodeToDelete = null,
         message = {failure: 'Failure: non-existent node in this list.'},
         beforeNodeToDelete = null,
         nodeToDelete = null,
@@ -98,3 +100,26 @@ DoublyList.prototype.remove = function(position) {
 
     return message.success;
 };
+
+DoublyList.prototype.print = function() {
+    let currentNode = this.head;
+
+    while(currentNode) {
+        console.log(currentNode)
+        currentNode = currentNode.next
+    }
+};
+
+const list = new DoublyList()
+
+list.add(1)
+list.add(2)
+list.add(3)
+list.add(4)
+list.add(5)
+list.add(6)
+//list.remove(2);
+list.print()
+
+//const a = list.searchNodeAt(2);
+//console.log(a);
